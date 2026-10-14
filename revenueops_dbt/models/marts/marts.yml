@@ -1,0 +1,92 @@
+
+version: 2
+
+models:
+  - name: dim_accounts
+    description: "One row per customer account"
+    columns:
+      - name: account_id
+        data_tests:
+          - unique
+          - not_null
+
+  - name: dim_sales_reps
+    description: "One row per sales representative"
+    columns:
+      - name: sales_rep_id
+        data_tests:
+          - unique
+          - not_null
+
+      - name: sales_rep
+        data_tests:
+          - not_null
+
+  - name: fct_opportunities
+    description: "One row per sales opportunity"
+    columns:
+      - name: opportunity_id
+        data_tests:
+          - unique
+          - not_null
+
+      - name: account_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_accounts')
+                field: account_id
+
+      - name: sales_rep_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_sales_reps')
+                field: sales_rep_id
+
+  - name: fct_payments
+    description: "One row per payment transaction"
+    columns:
+      - name: payment_id
+        data_tests:
+          - unique
+          - not_null
+
+      - name: opportunity_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('fct_opportunities')
+                field: opportunity_id
+
+      - name: payment_amount_usd
+        data_tests:
+          - not_null
+
+  
+  - name: mart_sales_performance
+    description: "Sales KPIs grouped by sales representative"
+
+    columns:
+      - name: sales_rep_id
+        data_tests:
+          - unique
+          - not_null
+
+      - name: total_opportunities
+        data_tests:
+          - not_null
+
+      - name: won_deal_value
+        data_tests:
+          - not_null
+
+      - name: open_pipeline_value
+        data_tests:
+          - not_null
+
+
+  

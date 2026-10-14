@@ -1,0 +1,26 @@
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.env
+.env.*
+
+# Credentials and private keys
+profiles.yml
+*.p8
+*.pem
+*.key
+profiles.yml
+secrets.toml
+
+# dbt-generated files
+**/target/
+**/logs/
+**/dbt_packages/
+
+# Mac
+.DS_Store
+
+# Local Streamlit secrets
+.streamlit/secrets.toml

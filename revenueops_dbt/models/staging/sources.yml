@@ -1,0 +1,18 @@
+
+version: 2
+
+sources:
+  - name: raw_sales
+    description: "Raw CRM and payment data for RevenueOps 360"
+    database: REVENUEOPS_DB
+    schema: RAW
+
+    tables:
+      - name: accounts
+        identifier: ACCOUNTS
+
+      - name: opportunities
+        identifier: OPPORTUNITIES
+
+      - name: payments
+        identifier: PAYMENTS
